@@ -1,4 +1,8 @@
+import 'package:blocs_app/config/helpers/random_generator.dart';
+import 'package:blocs_app/presentation/blocs/02-counter/counter_cubit.dart';
+import 'package:blocs_app/presentation/blocs/blocs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class MultipleCubitScreen extends StatelessWidget {
@@ -6,6 +10,11 @@ class MultipleCubitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final counterCubit = context.watch<CounterCubit>(); 
+    final themeCubit = context.watch<ThemeCubit>();
+    final userNameCubit = context.watch<UserNameCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Multiple Cubits'),
@@ -16,17 +25,25 @@ class MultipleCubitScreen extends StatelessWidget {
             const Spacer(flex: 1,),
 
             IconButton(
+              icon:
+              themeCubit.state.isDarkmode
+                ? const Icon( Icons.light_mode_outlined, size: 100 )
+                : const Icon( Icons.dark_mode_outlined, size: 100 ),
               // icon: const Icon( Icons.light_mode_outlined, size: 100 ),
-              icon: const Icon( Icons.dark_mode_outlined, size: 100 ),
-              onPressed: () {},
+              //icon: const Icon( Icons.dark_mode_outlined, size: 100 ),
+              onPressed: () {
+                themeCubit.toogleTheme();
+              },
             ),
 
-            const Text('Fernando Herrera', style: TextStyle(fontSize: 25 )),
+            Text(userNameCubit.state, style:const TextStyle(fontSize: 25 )),
 
             TextButton.icon(
               icon: const Icon( Icons.add, size: 50,),
-              label: const Text('0', style: TextStyle(fontSize: 100)),
-              onPressed: () {},
+              label:  Text('${counterCubit.state}', style: const TextStyle(fontSize: 100)),
+              onPressed: () {
+                counterCubit.incrementBy(1);
+              },
             ),
             
             const Spacer( flex: 2 ),
@@ -34,9 +51,11 @@ class MultipleCubitScreen extends StatelessWidget {
         )
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: const Text('Nombre aleatorio'),
-        icon: const Icon( Icons.refresh_rounded ),
-        onPressed: () {},
+        label: const Text(''),
+        icon: const Icon( Icons.refresh_outlined ),
+        onPressed: () {
+          userNameCubit.setUserName(RandomGenerator.getRandomName());
+        },
       ),
     );
   }
