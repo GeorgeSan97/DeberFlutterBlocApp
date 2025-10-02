@@ -68,7 +68,7 @@ class _TodoView extends StatelessWidget {
                 title: Text(guest.description),
                 value: guest.done, 
                 onChanged: ( value ) {
-                  
+                  guestBloc.toggleGuest(guest.id);
                 }
               );
             },

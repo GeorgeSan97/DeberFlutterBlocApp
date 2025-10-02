@@ -31,6 +31,7 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     });
 
     on<AddGuest>((_addGuestHandler));
+    on<ToggleGuest>((_toggleGuestHandler));
   }
 
   void changeFilter(GuestFilter newFilter) { 
@@ -41,6 +42,12 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     add(AddGuest(name));
   }
 
+  
+
+  void toggleGuest(String id){
+    add( ToggleGuest(id) );
+  }
+
   void _addGuestHandler( AddGuest event,Emitter<GuestsState> emit){
     final newGuest = Todo(
       id: uuid.v4(),
@@ -49,5 +56,19 @@ class GuestsBloc extends Bloc<GuestsEvent, GuestsState> {
     );
     emit(state.copyWith(guests: [...state.guests, newGuest]));
   }
+
+    void _toggleGuestHandler(ToggleGuest event, Emitter<GuestsState> emit) {
+      final newGuests = state.guests.map((guest) {
+        if (guest.id == event.id) {
+          return guest.copyWith(
+            completedAt: guest.completedAt == null ? DateTime.now() : null
+          );
+        } 
+          return guest;
+        
+      }).toList();
+
+      emit(state.copyWith(guests: newGuests));
+    }
 
 }

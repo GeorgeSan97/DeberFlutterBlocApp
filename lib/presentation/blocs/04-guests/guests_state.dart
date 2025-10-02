@@ -31,6 +31,7 @@ class GuestsState extends Equatable {
         case GuestFilter.all:
         return guests;
         
+        // ignore: unreachable_switch_default
         default: 
         throw Exception('Filter value not valid');
       }
