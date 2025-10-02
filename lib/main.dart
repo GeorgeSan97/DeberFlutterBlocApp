@@ -8,17 +8,18 @@ void main()
   serviceLocatorInit(); 
   runApp(const BlocsProviders());
 }
-
+ 
 class BlocsProviders extends StatelessWidget {
   const BlocsProviders({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create:  (context) => getIt<UserNameCubit>() ),
-      BlocProvider(create:  (context) => getIt<RoutersimpleCubit>() ),
-      BlocProvider(create:  (context) => getIt<CounterCubit>() ),
-      BlocProvider(create:  (context) => getIt<ThemeCubit>() ),
+      BlocProvider(create: (context) => getIt<UserNameCubit>()     ),
+      BlocProvider(create: (context) => getIt<RoutersimpleCubit>() ),
+      BlocProvider(create: (context) => getIt<CounterCubit>()      ),
+      BlocProvider(create: (context) => getIt<ThemeCubit>()        ),
+      BlocProvider(create: (context) => getIt<GuestsBloc>()        ),
     ],
     child: const MyApp());
   }
