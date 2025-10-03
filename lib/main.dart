@@ -15,13 +15,14 @@ class BlocsProviders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => getIt<UserNameCubit>()     ),
-      BlocProvider(create: (context) => getIt<RoutersimpleCubit>() ),
-      BlocProvider(create: (context) => getIt<CounterCubit>()      ),
-      BlocProvider(create: (context) => getIt<ThemeCubit>()        ),
-      BlocProvider(create: (context) => getIt<GuestsBloc>()        ),
-      BlocProvider(create: (context) => getIt<PokemonBloc>()       ),
-      BlocProvider(create: (context) => getIt<GeolocationCubit>()  ),
+      BlocProvider(create: (context) => getIt<UserNameCubit>()         ),
+      BlocProvider(create: (context) => getIt<RoutersimpleCubit>()     ),
+      BlocProvider(create: (context) => getIt<CounterCubit>()          ),
+      BlocProvider(create: (context) => getIt<ThemeCubit>()            ),
+      BlocProvider(create: (context) => getIt<GuestsBloc>()            ),
+      BlocProvider(create: (context) => getIt<PokemonBloc>()           ),
+      BlocProvider(create: (context) => getIt<GeolocationCubit>()      ),
+      BlocProvider(create: (context) => getIt<HistoricLocationBloc>()  ),
     ],
     child: const MyApp());
   }

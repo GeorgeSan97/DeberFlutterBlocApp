@@ -21,8 +21,12 @@ void serviceLocatorInit() {
     )
   );
   
+  getIt.registerSingleton(HistoricLocationBloc());
+  
   getIt.registerSingleton(
-      GeolocationCubit()
+      GeolocationCubit(
+        onNewUserLocationCallback: getIt<HistoricLocationBloc>().onNewUserLocation,
+      )
       ..watchUserLocation()
   );
 
